@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-08-27T01:20:59Z"
+  labels:
+    app: appserver
+  name: appserver
+  namespace: unimed
+  resourceVersion: "1462"
+  uid: 130128f1-8b2c-44a6-90cf-7bcd5fbf521a
+spec:
+  clusterIP: 10.102.57.110
+  clusterIPs:
+  - 10.102.57.110
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: appserver
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

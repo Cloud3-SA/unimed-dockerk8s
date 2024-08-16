@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: appserver
+  name: appserver
+  namespace: unimed
+spec:
+  selector:
+    matchLabels:
+      app: appserver
+  template:
+    metadata:
+      labels:
+        app: appserver
+    spec:
+      containers:
+      - image: docker.io/hectorvido/csharp
+        name: appserver
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql.env
+              key: MYSQL_USER
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysql.env
+              key: MYSQL_PASSWORD
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql.env
+              key: MYSQL_DATABASE
+        ports:
+        - containerPort: 8080
+          protocol: TCP

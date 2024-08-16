@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx.conf
+  namespace: unimed
+data:
+  nginx.conf: |
+    server {
+        listen       80;
+        listen  [::]:80;
+        server_name  localhost;
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+
+        location / {
+            proxy_pass http://dotnet;
+            proxy_set_header Host $host;
+        }
+    }
+
+    upstream dotnet {
+        server appserver:8080;
+    }

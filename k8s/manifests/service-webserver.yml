@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-08-27T01:21:14Z"
+  labels:
+    app: webserver
+  name: webserver
+  namespace: unimed
+  resourceVersion: "1479"
+  uid: 780aa02d-41a2-4246-b62f-9effa9f9f7ba
+spec:
+  clusterIP: 10.100.183.101
+  clusterIPs:
+  - 10.100.183.101
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: webserver
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
